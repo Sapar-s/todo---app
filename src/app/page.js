@@ -6,12 +6,20 @@ export default function Home() {
   const [todos, setTodos] = useState([" "]);
   const [newTodo, setNewTodo] = useState("");
 
-  const addTodoHandler = () => {
-    setTodos([...todos, newTodo]);
+  const addTodoHandler = (event) => {
+    if (
+      event.type === "click" ||
+      (event.type === "keydown" && event.key === "Enter")
+    ) {
+      if (newTodo.trim() !== "") {
+        setTodos([...todos, newTodo]);
+        setNewTodo("");
+      }
+    }
   };
-  const deleteHandler = () => {
-    alert("are you sure to delete ?");
-  };
+  // const deleteHandler = () => {
+  //   alert("are you sure to delete ?");
+  // };
   return (
     <div className={styles.bdy}>
       <div className={styles[`todo-container`]}>
@@ -20,7 +28,9 @@ export default function Home() {
           <input
             type="text"
             placeholder="Add a new task..."
+            value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
+            onKeyDown={addTodoHandler}
           />
           <button onClick={addTodoHandler}>Add</button>
         </div>
@@ -34,9 +44,9 @@ export default function Home() {
           <div>
             <button>Completed</button>
           </div>
-          <button onClick={deleteHandler}>Delete</button>
+          {/* <button onClick={deleteHandler}>Delete</button> */}
         </div>
-        <div>
+        <div className={styles.tasks}>
           {todos.map((todo, index) => {
             return <p key={index}>{todo}</p>;
           })}
