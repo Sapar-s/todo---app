@@ -69,11 +69,20 @@
 
 .parag {
   margin: 32px 0 40px 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .parag p {
   color: #6b7280;
   font-size: 14px;
+}
+
+.parag button {
+  border: none;
+  background: none;
+  color: #ef4444;
 }
 
 .todo-container h4 {

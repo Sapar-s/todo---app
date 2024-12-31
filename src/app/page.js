@@ -1,11 +1,14 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
+  const [taskCompleted, setTaskCompleted] = useState(
+    "No tasks yet. Add one above!"
+  );
 
   const addTodoHandler = (event) => {
     if (
@@ -26,6 +29,15 @@ export default function Home() {
     todos.splice(index, 1);
     setTodos([...todos]);
   };
+
+  useEffect(() => {
+    if (todos.length === 0) {
+      setTaskCompleted("No tasks yet. Add one above!");
+    } else {
+      setTaskCompleted(todos.length);
+    }
+  });
+
   return (
     <div className={styles.bdy}>
       <div className={styles[`todo-container`]}>
@@ -66,6 +78,7 @@ export default function Home() {
             </button>
           </div>
         </div>
+
         <div>
           {todos.map((todo, index) => (
             <div key={index} className={styles.tasks}>
@@ -81,7 +94,8 @@ export default function Home() {
         </div>
 
         <div className={styles.parag}>
-          <p>No tasks yet. Add one above!</p>
+          <p>{taskCompleted}</p>
+          <button>Clear completed</button>
         </div>
         <div>
           <h4>
