@@ -48,6 +48,7 @@
   color: #fff;
   border-radius: 6px;
   border: none;
+  cursor: pointer;
 }
 
 .sorts {
@@ -63,11 +64,7 @@
   font-size: 12px;
   margin-right: 10px;
   height: 32px;
-}
-
-.sorts .all button {
-  background-color: #3c82f6;
-  color: #fff;
+  cursor: pointer;
 }
 
 .parag {
@@ -85,7 +82,50 @@
 }
 
 .tasks {
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 345px;
+  height: 62px;
   border-radius: var(--radius-rounded-md, 6px);
   background: #f9fafb;
+  padding: 16px;
+  align-items: center;
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+.tasks:hover {
+  background-color: #f3f4f6;
+}
+
+.tasks input {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.tasksleft input[type="checkbox"]:checked + p {
+  text-decoration: line-through;
+}
+
+/* .tasks p { */
+/* width: 100%; */
+/* height: 25px; */
+/* margin: 10px 0; */
+/* padding: 10px 0; */
+/* } */
+
+.tasks button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #fef2f2;
+  color: #ef4444;
+  cursor: pointer;
+}
+
+.activeStyle {
+  background-color: #3c82f6 !important;
+  color: #fff;
 }
