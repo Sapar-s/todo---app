@@ -38,6 +38,11 @@ export default function Home() {
     }
   });
 
+  // const clearCompleted = () => {
+  //   alert("Are you sure you want to clear all completed tasks?")
+
+  // }
+
   return (
     <div className={styles.bdy}>
       <div className={styles[`todo-container`]}>
@@ -55,7 +60,7 @@ export default function Home() {
         <div className={`${styles.flex} ${styles["sorts"]}`}>
           <div className={styles.all}>
             <button
-              className={activeFilter == "all" && styles.activeStyle}
+              className={`${activeFilter == "all" && styles.activeStyle}`}
               onClick={() => setActiveFilter("all")}
             >
               All
@@ -63,7 +68,7 @@ export default function Home() {
           </div>
           <div>
             <button
-              className={activeFilter == "active" && styles.activeStyle}
+              className={`${activeFilter == "active" && styles.activeStyle}`}
               onClick={() => setActiveFilter("active")}
             >
               Active
@@ -71,7 +76,7 @@ export default function Home() {
           </div>
           <div>
             <button
-              className={activeFilter == "completed" && styles.activeStyle}
+              className={`${activeFilter == "completed" && styles.activeStyle}`}
               onClick={() => setActiveFilter("completed")}
             >
               Completed
@@ -97,6 +102,7 @@ export default function Home() {
           <p>{taskCompleted}</p>
           <button>Clear completed</button>
         </div>
+
         <div>
           <h4>
             Powered by{" "}
