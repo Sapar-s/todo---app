@@ -50,8 +50,33 @@ export default function Home() {
       return t;
     });
 
-    console.log(changedTodos);
+    // console.log(changedTodos);
     setTodos(changedTodos);
+  };
+
+  // function clearCompletedHandler() {
+  //   if (toggleIsCompleted.changedTodos.isCompleted == true) {
+  //     toggleIsCompleted.changedTodos.isCompleted.splice(0, length);
+  //   }
+  // }
+
+  // console.log("hahhahah", todos.isCompleted);
+
+  const clearCompletedHandler = () => {
+    const reamainingTodos = todos.map((todo) => {
+      // todo.isCompleted
+      if (todo.isCompleted) {
+        return todo;
+      }
+    });
+    setTodos(...reamainingTodos);
+    alert("Are you sure you want to clear all completed tasks?");
+    // if (todos.isCompleted == true) {
+    //   todos.splice(0, length - 1);
+    //   setTodos([...todos]);
+    //   // console.log(todos);
+    //   alert("Are you sure you want to clear all completed tasks?");
+    // }
   };
 
   // const clearCompletedd = () => {
@@ -116,7 +141,7 @@ export default function Home() {
               <div className={`${styles.flex} ${styles.tasksleft}`}>
                 <input
                   type="checkbox"
-                  onClick={() => toggleIsCompleted(todo)}
+                  onChange={() => toggleIsCompleted(todo)}
                   checked={todo.isCompleted}
                 />
                 <p>{todo.title}</p>
@@ -130,7 +155,10 @@ export default function Home() {
 
         <div className={styles.parag}>
           <p>{taskCompleted}</p>
-          <button>{clearCompleted}</button>
+          <button onClick={() => clearCompletedHandler()}>
+            {/* {clearCompleted} */}
+            clear completed
+          </button>
         </div>
 
         <div>

@@ -83,6 +83,7 @@
   border: none;
   background: none;
   color: #ef4444;
+  cursor: pointer;
 }
 
 .todo-container h4 {
