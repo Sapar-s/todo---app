@@ -23,6 +23,7 @@
 
 .flex {
   display: flex;
+  word-break: break-word;
 }
 
 .todo-container h1 {
@@ -79,6 +80,12 @@
   font-size: 14px;
 }
 
+.emptyTask {
+  color: #6b7280;
+  font-size: 14px;
+  margin: 32px 0 40px 0;
+}
+
 .parag button {
   border: none;
   background: none;
@@ -95,7 +102,8 @@
   display: flex;
   justify-content: space-between;
   width: 345px;
-  height: 62px;
+  /* height: 62px; */
+  /* overflow: hidden; */
   border-radius: var(--radius-rounded-md, 6px);
   background: #f9fafb;
   padding: 16px;
@@ -117,6 +125,7 @@
 
 .tasksleft input[type="checkbox"]:checked + p {
   text-decoration: line-through;
+  word-break: break-all;
 }
 
 /* .tasks p { */
@@ -138,4 +147,9 @@
 .activeStyle {
   background-color: #3c82f6 !important;
   color: #fff;
+}
+
+.pineconeLink a {
+  text-decoration: none;
+  color: #3c82f6;
 }

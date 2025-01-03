@@ -4,26 +4,24 @@ import styles from "./page.module.css";
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
-  const [newTodo, setNewTodo] = useState();
+  const [newTodo, setNewTodo] = useState("");
 
   const [activeFilter, setActiveFilter] = useState("all");
-  const [taskCompleted, setTaskCompleted] = useState(
-    "No tasks yet. Add one above!"
-  );
-  const [clearCompleted, setClearCompleted] = useState("Clear completed");
+  // const [taskCompleted, setTaskCompleted] = useState("");
+  // const [clearCompleted, setClearCompleted] = useState("Clear completed");
 
-  const addTodoHandler = () => {
-    // if (
-    //   event.type === "click" ||
-    //   (event.type === "keydown" && event.key === "Enter")
-    // )
-
-    //  {
-    // if (newTodo !== "") {
-    setTodos([...todos, { title: newTodo, isCompleted: false }]);
-    // setNewTodo("");
-    // }
-    // }
+  const addTodoHandler = (event) => {
+    if (
+      event.type === "click" ||
+      (event.type === "keydown" && event.key === "Enter")
+    ) {
+      if (newTodo !== "") {
+        setTodos([...todos, { title: newTodo, isCompleted: false }]);
+        setNewTodo("");
+      } else {
+        alert("Please enter a task!");
+      }
+    }
   };
 
   // const checkBoxHandler = () => {};
@@ -34,13 +32,7 @@ export default function Home() {
     setTodos([...todos]);
   };
 
-  useEffect(() => {
-    if (todos.length === 0) {
-      setTaskCompleted("No tasks yet. Add one above!");
-    } else {
-      setTaskCompleted(todos.length);
-    }
-  }, []);
+  const completedTasksLength = todos.filter((todo) => todo.isCompleted).length;
 
   const toggleIsCompleted = (incomingTodo) => {
     let changedTodos = todos.map((t) => {
@@ -50,48 +42,25 @@ export default function Home() {
       return t;
     });
 
-    // console.log(changedTodos);
     setTodos(changedTodos);
   };
 
-  // function clearCompletedHandler() {
-  //   if (toggleIsCompleted.changedTodos.isCompleted == true) {
-  //     toggleIsCompleted.changedTodos.isCompleted.splice(0, length);
-  //   }
-  // }
-
-  // console.log("hahhahah", todos.isCompleted);
-
   const clearCompletedHandler = () => {
-    const reamainingTodos = todos.map((todo) => {
-      // todo.isCompleted
-      if (todo.isCompleted) {
-        return todo;
-      }
-    });
-    setTodos(...reamainingTodos);
-    alert("Are you sure you want to clear all completed tasks?");
-    // if (todos.isCompleted == true) {
-    //   todos.splice(0, length - 1);
-    //   setTodos([...todos]);
-    //   // console.log(todos);
-    //   alert("Are you sure you want to clear all completed tasks?");
-    // }
+    if (todos.filter((todo) => todo.isCompleted).length === 0) {
+      alert("There are no completed tasks");
+    } else {
+      const reamainingTodos = todos.filter((todo) => !todo.isCompleted);
+      setTodos([...reamainingTodos]);
+      alert("Are you sure you want to clear all completed tasks?");
+    }
   };
 
-  // const clearCompletedd = () => {
-  //   if (todos.length === 0) {
-  //     setClearCompleted("Clear completed ");
-  //   } else {
-  //     // setClearCompleted(todos.splice(index, 1)(setTodos([...todos])));
-  //     const haha = (index) => {
-  //       todos.splice(index, 1);
-  //       setTodos([...todos]);
-  //     };
-
-  //     setClearCompleted(haha, " ");
-  //     alert("Are you sure you want to clear all completed tasks?");
-  //   }
+  // const sortTasks = () => {
+  const sortTasks = todos.filter((todo) => {
+    if (activeFilter == "active") return !todo.isCompleted;
+    if (activeFilter == "completed") return todo.isCompleted;
+    return true;
+  });
   // };
 
   return (
@@ -104,7 +73,7 @@ export default function Home() {
             placeholder="Add a new task..."
             value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
-            // onKeyDown={addTodoHandler}
+            onKeyDown={addTodoHandler}
           />
           <button onClick={addTodoHandler}>Add</button>
         </div>
@@ -136,7 +105,7 @@ export default function Home() {
         </div>
 
         <div>
-          {todos.map((todo, index) => (
+          {sortTasks.map((todo, index) => (
             <div key={index} className={styles.tasks}>
               <div className={`${styles.flex} ${styles.tasksleft}`}>
                 <input
@@ -153,18 +122,27 @@ export default function Home() {
           ))}
         </div>
 
-        <div className={styles.parag}>
-          <p>{taskCompleted}</p>
-          <button onClick={() => clearCompletedHandler()}>
-            {/* {clearCompleted} */}
-            clear completed
-          </button>
-        </div>
+        {todos.length > 0 ? (
+          <div className={styles.parag}>
+            <p>
+              {completedTasksLength} of {todos.length} tasks completed
+            </p>
+            <button onClick={() => clearCompletedHandler()}>
+              Clear Completed
+            </button>
+          </div>
+        ) : (
+          <div className={styles.emptyTask}>
+            <p>No tasks yet. Add one above!</p>
+          </div>
+        )}
 
-        <div>
+        <div className={styles.pineconeLink}>
           <h4>
             Powered by{" "}
-            <span style={{ color: "#3c82f6" }}> Pinecone academy </span>
+            <span style={{ color: "#3c82f6" }}>
+              <a href="https://pinecone.mn/">Pinecone academy </a>
+            </span>
           </h4>
         </div>
       </div>
