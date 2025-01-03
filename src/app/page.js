@@ -27,9 +27,10 @@ export default function Home() {
   // const checkBoxHandler = () => {};
   // [1,2,3,4,5]
   const deleteHandler = (index) => {
-    alert("are you sure to delete ?");
-    todos.splice(index, 1);
-    setTodos([...todos]);
+    if (confirm("are you sure to delete ?")) {
+      todos.splice(index, 1);
+      setTodos([...todos]);
+    }
   };
 
   const completedTasksLength = todos.filter((todo) => todo.isCompleted).length;
@@ -48,10 +49,9 @@ export default function Home() {
   const clearCompletedHandler = () => {
     if (todos.filter((todo) => todo.isCompleted).length === 0) {
       alert("There are no completed tasks");
-    } else {
+    } else if (confirm("Are you sure you want to clear all completed tasks?")) {
       const reamainingTodos = todos.filter((todo) => !todo.isCompleted);
       setTodos([...reamainingTodos]);
-      alert("Are you sure you want to clear all completed tasks?");
     }
   };
 
