@@ -7,8 +7,6 @@ export default function Home() {
   const [newTodo, setNewTodo] = useState("");
 
   const [activeFilter, setActiveFilter] = useState("all");
-  // const [taskCompleted, setTaskCompleted] = useState("");
-  // const [clearCompleted, setClearCompleted] = useState("Clear completed");
 
   const addTodoHandler = (event) => {
     if (
@@ -24,8 +22,6 @@ export default function Home() {
     }
   };
 
-  // const checkBoxHandler = () => {};
-  // [1,2,3,4,5]
   const deleteHandler = (index) => {
     if (confirm("are you sure to delete ?")) {
       todos.splice(index, 1);
@@ -55,13 +51,11 @@ export default function Home() {
     }
   };
 
-  // const sortTasks = () => {
   const sortTasks = todos.filter((todo) => {
     if (activeFilter == "active") return !todo.isCompleted;
     if (activeFilter == "completed") return todo.isCompleted;
     return true;
   });
-  // };
 
   return (
     <div className={styles.bdy}>

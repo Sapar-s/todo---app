@@ -102,8 +102,6 @@
   display: flex;
   justify-content: space-between;
   width: 345px;
-  /* height: 62px; */
-  /* overflow: hidden; */
   border-radius: var(--radius-rounded-md, 6px);
   background: #f9fafb;
   padding: 16px;
@@ -127,13 +125,6 @@
   text-decoration: line-through;
   word-break: break-all;
 }
-
-/* .tasks p { */
-/* width: 100%; */
-/* height: 25px; */
-/* margin: 10px 0; */
-/* padding: 10px 0; */
-/* } */
 
 .tasks button {
   padding: 6px 12px;
